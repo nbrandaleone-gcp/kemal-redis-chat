@@ -75,7 +75,7 @@ Click on the button below to:
 1. Launch a Cloud Shell machine
 2. Download this GitHub repository
 3. Build a container using Docker
-4. Push the container into Google Container Regsitry
+4. Push the container into Google Artifact Registry
 5. Launch Cloud Run
 
 All automatically...
