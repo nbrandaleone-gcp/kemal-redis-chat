@@ -58,15 +58,15 @@ Before you can run the code locally, you need to do the following:
     gcloud beta run deploy websockets \
     --source . \
     --allow-unauthenticated \
-    --region $REGION \
+    --region us-central1 \
     --max-instances 10 \
     --concurrency 100 \
     --timeout 3600 \
     --network=default \
     --subnet=default \
     --vpc-egress=private-ranges-only \
-    --set-env-vars REDIS=$REDISHOST \
-    --set-env-vars DEBUG="false"
+    --set-env-vars REDIS=${REDISHOST} \
+    --set-env-vars DEBUG="true"
     ```
     
 ## Deploying via Cloud Run button
@@ -97,7 +97,8 @@ All automatically...
 ## Clean up
 
 ``` bash
-    gcloud run services delete websockets
+    gcloud run services delete websockets --region us-central1
+    gcloud redis instances delete redis-chat --region us-central1
 ```
 
 ---
