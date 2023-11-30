@@ -2,42 +2,38 @@
 ### kemal-redis-chat
 
 This sample demonstrates how to use [WebSockets](https://en.wikipedia.org/wiki/WebSocket)
-on [Cloud Run][run] with [Crystal](https://crystal-lang.org/). 
+on [Cloud Run][https://cloud.google.com/run/docs/overview/what-is-cloud-run] with [Crystal](https://crystal-lang.org/). 
 The demo is a web app, that supports a single chat room.
-Crystal is a compiled language, that has a syntax similar to Ruby.
+Crystal is a compiled language that has a syntax similar to Ruby.
 It is known to be very fast (as fast as Go), and the binaries are very small.
 The web server is known as [Kemal](https://kemalcr.com/), and supports
 WebSockets out of the box.
 
-In order to have a consistent chat message queue, even when there are
-numerous web servers due to auto-scaling, we must use a database for
+In order to have a consistent chat message queue, especially when there are
+multiple web servers due to auto-scaling, we must use a database for
 persistence.  We use [Redis](https://redis.com/), since it is fast and
 simple to set-up.
 
 ![Architecture diagram](./websocket-redis-architecture.png)
 
 - [Crystal Websockets sample for Cloud Run](#kemal-redis-chat)
-  - [Setup](#setup)
   - [Running locally](#running-locally)
   - [Deploying to Cloud Run](#deploying-to-cloud-run)
   - [Deploying via Cloud Run button](#deploying-via-cloud-run-button)
 
-## Setup
+## Running locally
 
-Before you can run or deploy the sample, you need to do the following:
+Before you can run the code locally, you need to do the following:
 
-1. Refer to the [run/README.md][readme] file for instructions on
-    running and deploying.
-2. Install `crystal` and its dependency manager `shards`
-3. Install dependencies:
+1. Install `crystal` and its dependency manager `shards`.
+2. Install dependencies:
 
     With `shards`:
 
         shards install
 
-## Running locally
 
-With `crystal`:
+    With `crystal`:
 
     crystal run src/kemal-redis-chat.cr
 
@@ -74,7 +70,7 @@ With `crystal`:
     ```
     
 ## Deploying via Cloud Run button
-Click on the below button to:
+Click on the button below to:
 1. Launch a Cloud Shell machine
 2. Download this GitHub repository
 3. Build a container using Docker
