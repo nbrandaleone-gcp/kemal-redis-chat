@@ -1,0 +1,19 @@
+name: kemal-redis-chat
+version: 0.1.0
+
+authors:
+  - Nick Brandaleone <nbrand@mac.com>
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+  redis:
+    github: stefanwille/crystal-redis
+
+targets:
+  kemal-redis-chat:
+    main: src/kemal-redis-chat.cr
+
+crystal: '>= 1.10.1'
+
+license: MIT

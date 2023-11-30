@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head><title>Chat</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="shortcut icon" href="https://material.io/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link href="https://unpkg.com/material-components-web@11.0.0/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@11.0.0/dist/material-components-web.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Chat room -->
+    <div class="page-wrap" id="chatroom">
+        <h1>Chat Room</h1>
+        <ul id="messages"></ul>
+        <footer class="site-footer">
+        <form id="chat">
+                <label class="mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <input class="mdc-text-field__input" id="msg" type="text" autocomplete="off">
+                    <span class="mdc-line-ripple"></span>
+                </label>
+                <div class="button-container">
+                    <button class="mdc-button send" type="submit">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">Send</span>
+                    </button>
+                </div>
+            </form>
+        </footer>
+    </div>
+
+<!--                
+    <pre id="chat"></pre>
+    <form>
+      <input id="msg" placeholder="message..." />
+      <input type="submit" value="Send" />
+    </form>
+-->
+    <script 
+      src="https://code.jquery.com/jquery-3.7.1.slim.js" 
+      integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" 
+      crossorigin="anonymous">
+    </script>
+
+    <script>
+      $(function() {
+
+        // Open WebbSocket connection
+        var ws = new WebSocket("ws://" + location.host + "/chat");
+        // Append each message
+          ws.onmessage = function(e) {$('#messages').append('<li>' + e.data) + '</li>'};
+
+        $('#chat').submit(function(e) {
+          e.preventDefault();
+          var message = $('#msg').val();
+          console.log(message);
+          ws.send(message);
+          $('#msg').val(''); $('#msg').focus();
+        });
+      });
+
+    </script>
+    <script>
+      // Material Design functionality
+      mdc.ripple.MDCRipple.attachTo(document.querySelector('.send'));
+    </script>
+  </body>
+</html>

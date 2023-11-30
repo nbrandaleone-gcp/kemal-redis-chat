@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head><title>Chat</title></head>
+  <body>
+    <pre id="chat"></pre>
+    <form>
+      <input id="msg" placeholder="message..." />
+      <input type="submit" value="Send" />
+    </form>
+    <script 
+      src="https://code.jquery.com/jquery-3.7.1.slim.js" 
+      integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" 
+      crossorigin="anonymous">
+    </script>
+
+    <script>
+      $(function() {
+
+        // Open WebbSocket connection
+        var ws = new WebSocket("ws://" + location.host + "/chat");
+        // Append each message
+        ws.onmessage = function(e) { $('#chat').append(e.data + '\n') };
+
+        $("form").submit(function(e) {
+          e.preventDefault();
+          var message = $('#msg').val();
+          console.log(message);
+          ws.send(message);
+          $('#msg').val(''); $('#msg').focus();
+        });
+      });
+
+    </script>
+  </body>
+</html>
