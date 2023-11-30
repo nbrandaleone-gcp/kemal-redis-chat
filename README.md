@@ -53,8 +53,7 @@ Before you can run the code locally, you need to do the following:
 2. Deploy to Cloud Run, with Direct VPC egress:
 
     ```bash
-    export REGION=us-central1
-    export REDISHOST=$(gcloud redis instances describe redis-chat --region REGION --format "value(host)")
+    export REDISHOST=$(gcloud redis instances describe redis-chat --region us-central1 --format "value(host)")
 
     gcloud beta run deploy websockets \
     --source . \
