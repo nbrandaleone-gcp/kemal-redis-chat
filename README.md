@@ -32,10 +32,11 @@ Before you can run the code locally, you need to do the following:
 
         shards install
 
+3. Run locally
 
     With `crystal`:
 
-    crystal run src/kemal-redis-chat.cr
+        crystal run src/kemal-redis-chat.cr
 
 > [!NOTE]
 > Unless you have a local redis DB running, the program will crash.
