@@ -24,12 +24,12 @@ all: build/cloud deploy
 .PHONY: watch
 ## Locally run program with dynamic recompile
 watch:
-	./dev/watch.sh $(TARGET)
+	./dev/watch.sh $(IMAGE_NAME)
 
 .PHONY: run
 ## Run program
 run:
-	crystal run src/$(TARGET).cr
+	crystal run src/$(IMAGE_NAME).cr
 
 .PHONY: deploy
 ## Deploy container to Cloud Run
@@ -37,13 +37,25 @@ deploy:
 	@echo "======================"
 	@echo "Deploying to Cloud Run"
 	@echo "======================"
-	gcloud run deploy $(TARGET) --image $(IMAGE_URI) \
-		--platform managed --allow-unauthenticated
+	gcloud run deploy $(TARGET) \
+	--platform managed \
+	--allow-unauthenticated \
+	--source . \ # --image $(IMAGE_URI)
+	--allow-unauthenticated \
+	--region us-central1 \
+	--max-instances 10 \
+	--concurrency 100 \
+	--timeout 3600 \
+	--network=default \
+	--subnet=default \
+	--vpc-egress=private-ranges-only \
+	--set-env-vars REDIS=${REDISHOST} \
+	--set-env-vars DEBUG="false"
 
 .PHONY: build/local
 ## Compiles source using shards command
 build/local:
-	@shards build $(TARGET)
+	@shards build $(IMAGE_NAME)
 
 .PHONY: build/cloud
 ## Build docker container in Cloud
@@ -80,7 +92,7 @@ logs/stream:
 clean/cloud:
 	@echo "Stopping and deleting Cloud Run service"
 	gcloud run services delete $(TARGET)
-	@echo "Deleting container image from GCR"
+	@echo "Deleting container image from Registry"
 	gcloud container images delete $(IMAGE_URI) --force-delete-tags
 # gcloud artifacts repositories delete
 	
