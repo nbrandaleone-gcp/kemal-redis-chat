@@ -153,6 +153,11 @@ It is now possible to send requests via a local proxy, even if the service is au
 docker network create -d bridge redisnet
 docker run -d -p 6379:6379 --name myredis --network redisnet redis
 
+## Proxy into GCP Redis via jumphost
+https://cloud.google.com/memorystore/docs/redis/connect-redis-instance?hl=en#connecting_from_a_local_machine_with_port_forwarding
+gcloud compute instances create NAME --machine-type=f1-micro --zone=ZONE
+gcloud compute ssh COMPUTE_VM_NAME --zone=ZONE -- -N -L 6379:REDIS_INSTANCE_IP_ADDRESS:6379
+
 # Appendix
 - https://cloud.google.com/run/docs/tutorials/websockets
 - https://github.com/GoogleCloudPlatform/nodejs-docs-samples/tree/main/run/websockets
