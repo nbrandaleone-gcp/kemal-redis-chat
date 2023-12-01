@@ -83,6 +83,13 @@ get "/shell" do
   output = stdout.to_s
 end
 
+post "/msg" do |env|
+  msg = env.params.json["msg"].as(String)
+  Log.debug { "post: #{msg}" }
+  REDIS.publish(CHANNEL, msg)
+  REDIS.rpush("history", message)
+end
+
 ws "/chat" do |socket|
   Log.debug { "In ws section" }
   SOCKETS << socket

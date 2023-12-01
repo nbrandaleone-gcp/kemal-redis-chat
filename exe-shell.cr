@@ -20,3 +20,11 @@ hostname = "my_host"
 args = ["-c 2", hostname]
 status, output = run_cmd(cmd, args)
 puts "ping: #{hostname}: Name or service not known" unless status == 0
+
+===
+
+POST
+
+curl -X POST http://localhost:3000/msg \
+-H "Content-Type: application/json" \
+-d '{"msg": "This is a test message"}'
