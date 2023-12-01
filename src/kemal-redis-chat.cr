@@ -31,21 +31,16 @@ Log.info { "Program started"}
 
 # Handle Ctrl+C (SIGTERM) and kill (SIGKILL) signal.
 Signal::INT.trap  { puts "Caught Ctrl+C..."; exit }
-Signal::TERM.trap { puts "Caught kill..."; exit }
+#Signal::TERM.trap { puts "Caught kill..."; exit }
 
 # Redis requires a Channel for PubSub
 CHANNEL = "chat"
 SOCKETS = [] of HTTP::WebSocket
 
 # redis client for publishing
-# begin rescue end blocks can be used for safety
 ENV["REDIS"] ||= "localhost"
-if ENV["DEBUG"] == "true"
-  Log.debug { "REDIS host is: #{ENV["REDIS"]}" }
-end
+Log.debug { "REDIS host is: #{ENV["REDIS"]}" }
 REDIS = Redis.new(host: ENV["REDIS"], port: 6379)
-#REDIS = Redis.new(host: "10.24.160.3", port: 6379)
-#REDIS = Redis.new(url: "redis://10.24.160.3", port: 6379)
 
 # redis client for subscriptions or receiving of messages
 spawn do
