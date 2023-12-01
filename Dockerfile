@@ -15,7 +15,7 @@ RUN crystal build --static --release ./src/kemal-redis-chat.cr
 
 # Release image
 FROM alpine:latest
-WORKDIR /
+WORKDIR /opt
 # Copy over binary and supporting files
 COPY --from=builder /opt/ .
 # Should run as non-root user

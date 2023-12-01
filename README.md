@@ -151,7 +151,7 @@ It is now possible to send requests via a local proxy, even if the service is au
 
 ## Running Redis locally
 docker network create -d bridge redisnet
-docker run -d -p 6379:6379 --name myredis --network redisnet redis
+docker run --rm -d -p 6379:6379 --name myredis --network redisnet redis
 
 ## Proxy into GCP Redis via jumphost
 https://cloud.google.com/memorystore/docs/redis/connect-redis-instance?hl=en#connecting_from_a_local_machine_with_port_forwarding

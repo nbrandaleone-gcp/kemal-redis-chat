@@ -1,7 +1,5 @@
-puts "START"
-fork do
- system "echo 'HELLO'"
-end
+## https://yduf.github.io/crystal-process/
+## https://firehydrant.com/blog/testing-shell-commands-with-the-crystal-cli/
 
 def run_cmd(cmd, args)
   stdout = IO::Memory.new

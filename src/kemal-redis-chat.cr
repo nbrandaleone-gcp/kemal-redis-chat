@@ -40,11 +40,12 @@ SOCKETS = [] of HTTP::WebSocket
 # redis client for publishing
 ENV["REDIS"] ||= "localhost"
 Log.debug { "REDIS host is: #{ENV["REDIS"]}" }
-REDIS = Redis.new(host: ENV["REDIS"], port: 6379)
+#REDIS = Redis.new(host: ENV["REDIS"], port: 6379)
+REDIS = Redis::PooledClient.new(host: ENV["REDIS"], port: 6379)
 
 # redis client for subscriptions or receiving of messages
 spawn do
-  redis_sub = Redis.new(host: ENV["REDIS"], port: 6379)
+  redis_sub = Redis::PooledClient.new(host: ENV["REDIS"], port: 6379)
   redis_sub.subscribe(CHANNEL) do |on|
     on.message do |channel, message|
       SOCKETS.each {|ws| ws.send(message) }
@@ -56,8 +57,13 @@ get "/" do
   render "views/index.ecr"
 end
 
-get "/redis" do
+get "/ping" do
   REDIS.ping
+end
+
+get "/history" do
+  Log.debug { "In /history section" }
+  REDIS.lrange("history", 0, -1).to_s
 end
 
 before_get "/api" do |env|
@@ -71,13 +77,10 @@ get "/api" do |env|
   {name: "Kemal", awesome: true}.to_json
 end
 
-get "/history" do
-end
-
-get "/whereami" do
-end
-
 get "/shell" do
+  stdout = IO::Memory.new
+  status = Process.run("ls", args: {"/"}, output: stdout)
+  output = stdout.to_s
 end
 
 ws "/chat" do |socket|
@@ -85,8 +88,9 @@ ws "/chat" do |socket|
   SOCKETS << socket
 
   socket.on_message do |message|
-    REDIS.publish(CHANNEL, message)
     Log.debug { "message: #{message}" }
+    REDIS.publish(CHANNEL, message)
+    REDIS.rpush("history", message)
   end
 
   socket.on_close do
