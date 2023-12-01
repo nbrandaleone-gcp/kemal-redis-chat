@@ -66,7 +66,7 @@ Before you can run the code locally, you need to do the following:
     --subnet=default \
     --vpc-egress=private-ranges-only \
     --set-env-vars REDIS=${REDISHOST} \
-    --set-env-vars DEBUG="true"
+    --set-env-vars DEBUG="false"
     ```
     
 ## Deploying via Cloud Run button
