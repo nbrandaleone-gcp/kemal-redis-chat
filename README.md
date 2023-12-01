@@ -2,7 +2,7 @@
 ### kemal-redis-chat
 
 This sample demonstrates how to use [WebSockets](https://en.wikipedia.org/wiki/WebSocket)
-on [Cloud Run][https://cloud.google.com/run/docs/overview/what-is-cloud-run] with [Crystal](https://crystal-lang.org/). 
+on [Cloud Run](https://cloud.google.com/run/docs/overview/what-is-cloud-run) with [Crystal](https://crystal-lang.org/). 
 The demo is a web app, that supports a single chat room.
 Crystal is a compiled language that has a syntax similar to Ruby.
 It is known to be very fast (as fast as Go), and the binaries are very small.
