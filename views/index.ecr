@@ -51,7 +51,7 @@
       $(function() {
 
         // Open WebSocket connection
-        var ws = new WebSocket("wss://" + location.host + "/chat");
+        var ws = new WebSocket("ws://" + location.host + "/chat");
         // Append each message
           ws.onmessage = function(e) {$('#messages').append('<li>' + e.data) + '</li>'};
 
