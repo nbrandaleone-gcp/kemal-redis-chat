@@ -38,7 +38,6 @@ deploy:
 	@echo "Deploying to Cloud Run"
 	@echo "======================"
 	gcloud run deploy $(TARGET) \
-	--platform managed \
 	--allow-unauthenticated \
 	--source . \ # --image $(IMAGE_URI)
 	--allow-unauthenticated \
