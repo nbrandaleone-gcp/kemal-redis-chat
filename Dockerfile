@@ -9,7 +9,7 @@ WORKDIR /opt
 COPY ./shard.yml ./shard.lock /opt/
 RUN shards install --production -v
 
-# Build a binary
+# Build the Crystal binary
 COPY . /opt/
 RUN crystal build --static --release ./src/kemal-redis-chat.cr
 
@@ -17,8 +17,6 @@ RUN crystal build --static --release ./src/kemal-redis-chat.cr
 FROM alpine:latest
 WORKDIR /
 # Copy over binary and supporting files
-#COPY . /  
-#COPY --from=builder /opt/kemal-redis-chat .
 COPY --from=builder /opt/ .
 # Should run as non-root user
 # USER 2:2
