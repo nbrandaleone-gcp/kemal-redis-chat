@@ -1,0 +1,1 @@
+2023-11-30 20:45:13 Unhandled exception in spawn: Socket::ConnectError: Error connecting to 'localhost:6379': Connection refused (Redis::CannotConnectError)

@@ -40,12 +40,16 @@ SOCKETS = [] of HTTP::WebSocket
 # redis client for publishing
 # begin rescue end blocks can be used for safety
 ENV["REDIS"] ||= "localhost"
-#REDIS = Redis.new
+if ENV["DEBUG"] == "true"
+  Log.debug { "REDIS host is: #{ENV["REDIS"]}" }
+end
 REDIS = Redis.new(host: ENV["REDIS"], port: 6379)
+#REDIS = Redis.new(host: "10.24.160.3", port: 6379)
+#REDIS = Redis.new(url: "redis://10.24.160.3", port: 6379)
 
 # redis client for subscriptions or receiving of messages
 spawn do
-  redis_sub = Redis.new
+  redis_sub = Redis.new(host: ENV["REDIS"], port: 6379)
   redis_sub.subscribe(CHANNEL) do |on|
     on.message do |channel, message|
       SOCKETS.each {|ws| ws.send(message) }
@@ -55,6 +59,10 @@ end
 
 get "/" do
   render "views/index.ecr"
+end
+
+get "/redis" do
+  REDIS.ping
 end
 
 before_get "/api" do |env|

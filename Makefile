@@ -4,7 +4,7 @@
 default: help
 
 # Variables
-TARGET=kemal-redis-chat
+TARGET=websockets
 PROJECT := $(shell gcloud config get-value project) 
 PROJECT_ID := $(strip $(PROJECT))
 DOCKER_REPO=my-docker-repo
