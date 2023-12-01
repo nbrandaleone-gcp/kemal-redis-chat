@@ -46,14 +46,14 @@ Before you can run the code locally, you need to do the following:
 1. Create a [Redis instance on Cloud Memorystore.](https://cloud.google.com/memorystore/docs/redis/creating-managing-instances) Make sure to choose the VPC network you will use (default). After it’s created, note its IP address.
 
     ```bash
-    gcloud redis instances create redis-chat --size=1 --region=us-central1 \
+    export REGION=us-central1
+    gcloud redis instances create redis-chat --size=1 --region=$REGION \
     --connect-mode=PRIVATE_SERVICE_ACCESS
     ```
     
 2. Deploy to Cloud Run, with Direct VPC egress:
 
     ```bash
-    export REGION=us-central1
     export PROJECT=$(gcloud config list --format 'value(core.project)' 2>/dev/null)
     export REDISHOST=$(gcloud redis instances describe redis-chat --region $REGION --format "value(host)")
 
