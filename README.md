@@ -53,12 +53,14 @@ Before you can run the code locally, you need to do the following:
 2. Deploy to Cloud Run, with Direct VPC egress:
 
     ```bash
-    export REDISHOST=$(gcloud redis instances describe redis-chat --region us-central1 --format "value(host)")
+    export REGION=us-central1
+    export PROJECT=$(gcloud config list --format 'value(core.project)' 2>/dev/null)
+    export REDISHOST=$(gcloud redis instances describe redis-chat --region $REGION --format "value(host)")
 
     gcloud beta run deploy websockets \
     --source . \
     --allow-unauthenticated \
-    --region us-central1 \
+    --region $REGION \
     --max-instances 10 \
     --concurrency 100 \
     --timeout 3600 \
@@ -91,14 +93,14 @@ All automatically...
 
 ```bash
     gcloud beta run services describe websockets \
-    --region=us-central1
+    --region=$REGION
 ```
 
 ## Clean up
 
 ``` bash
-    gcloud run services delete websockets --region us-central1
-    gcloud redis instances delete redis-chat --region us-central1
+    gcloud run services delete websockets --region $REGION
+    gcloud redis instances delete redis-chat --region $REGION
 ```
 
 ---

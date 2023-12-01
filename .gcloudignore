@@ -1,0 +1,10 @@
+# .gcloudignore
+# gcloud topic gcloudignore
+.gcloudignore
+.git
+.gitignore
+README.md
+Makefile
+/dev
+websocket-redis-architecture.png
+kemal-redis-chat.dwarf

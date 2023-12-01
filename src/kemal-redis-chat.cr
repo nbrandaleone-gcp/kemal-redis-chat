@@ -30,7 +30,7 @@ Log.info { "Program started"}
 # with a SIGKILL signal.
 
 # Handle Ctrl+C (SIGTERM) and kill (SIGKILL) signal.
-Signal::INT.trap  { puts "Caught Ctrl+C..."; exit }
+Signal::INT.trap  { puts "Caught Ctrl+C..."; REDIS.close; exit }
 #Signal::TERM.trap { puts "Caught kill..."; exit }
 
 # Redis requires a Channel for PubSub
