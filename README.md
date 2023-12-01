@@ -47,6 +47,7 @@ Before you can run the code locally, you need to do the following:
 
     ```bash
     export REGION=us-central1
+    
     gcloud redis instances create redis-chat --size=1 --region=$REGION \
     --connect-mode=PRIVATE_SERVICE_ACCESS
     ```
