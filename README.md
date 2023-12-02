@@ -155,8 +155,11 @@ docker run --rm -d -p 6379:6379 --name myredis --network redisnet redis
 
 ## Proxy into GCP Redis via jumphost
 https://cloud.google.com/memorystore/docs/redis/connect-redis-instance?hl=en#connecting_from_a_local_machine_with_port_forwarding
+
+```bash
 gcloud compute instances create NAME --machine-type=f1-micro --zone=ZONE
 gcloud compute ssh COMPUTE_VM_NAME --zone=ZONE -- -N -L 6379:REDIS_INSTANCE_IP_ADDRESS:6379
+```
 
 # Appendix
 - https://cloud.google.com/run/docs/tutorials/websockets
