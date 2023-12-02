@@ -6,5 +6,6 @@
 README.md
 Makefile
 /dev
+/notes
 websocket-redis-architecture.png
 kemal-redis-chat.dwarf
