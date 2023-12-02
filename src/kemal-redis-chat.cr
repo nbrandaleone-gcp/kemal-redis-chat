@@ -87,7 +87,7 @@ post "/msg" do |env|
   msg = env.params.json["msg"].as(String)
   Log.debug { "post: #{msg}" }
   REDIS.publish(CHANNEL, msg)
-  REDIS.rpush("history", message)
+  REDIS.rpush("history", msg)
 end
 
 ws "/chat" do |socket|

@@ -15,7 +15,7 @@
     <!-- Chat room -->
     <div class="page-wrap" id="chatroom">
         <h1>Chat Room</h1>
-        <!--    <h1>My <b style='color:red;'>NEW</b> Chat Room</h1> -->
+        <!--<h1>My <b style='color:red;'>NEW</b> Chat Room</h1>-->
         <ul id="messages"></ul>
         <footer class="site-footer">
         <form id="chat">
@@ -51,7 +51,7 @@
       $(function() {
 
         // Open WebSocket connection
-        var ws = new WebSocket("ws://" + location.host + "/chat");
+        var ws = new WebSocket("wss://" + location.host + "/chat");
         // Append each message
           ws.onmessage = function(e) {$('#messages').append('<li>' + e.data) + '</li>'};
 

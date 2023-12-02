@@ -93,15 +93,15 @@ All automatically...
 ## Describe Cloud Run service
 
 ```bash
-    gcloud beta run services describe websockets \
-    --region=$REGION
+gcloud beta run services describe websockets \
+--region=$REGION
 ```
 
 ## Clean up
 
 ``` bash
-    gcloud run services delete websockets --region $REGION
-    gcloud redis instances delete redis-chat --region $REGION
+gcloud run services delete websockets --region $REGION
+gcloud redis instances delete redis-chat --region $REGION
 ```
 
 ---
@@ -146,7 +146,7 @@ curl --header "Authorization: Bearer $(gcloud auth print-identity-token)" [URL]
 It is now possible to send requests via a local proxy, even if the service is authenticated.
 
 ``` bash
-    gcloud beta run services proxy
+gcloud beta run services proxy
 ```
 
 ## Running Redis locally
