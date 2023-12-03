@@ -59,17 +59,17 @@ Before you can run the code locally, you need to do the following:
     export REDISHOST=$(gcloud redis instances describe redis-chat --region $REGION --format "value(host)")
 
     gcloud beta run deploy websockets \
-    --source . \
-    --allow-unauthenticated \
-    --region $REGION \
-    --max-instances 10 \
-    --concurrency 100 \
-    --timeout 3600 \
-    --network=default \
-    --subnet=default \
-    --vpc-egress=private-ranges-only \
-    --set-env-vars REDIS=${REDISHOST} \
-    --set-env-vars DEBUG="false"
+        --source . \
+        --allow-unauthenticated \
+        --region $REGION \
+        --max-instances 10 \
+        --concurrency 100 \
+        --timeout 3600 \
+        --network=default \
+        --subnet=default \
+        --vpc-egress=private-ranges-only \
+        --set-env-vars REDIS=${REDISHOST} \
+        --set-env-vars DEBUG="false"
     ```
     
 ## Deploying via Cloud Run button
@@ -94,7 +94,7 @@ All automatically...
 
 ```bash
 gcloud beta run services describe websockets \
---region=$REGION
+    --region=$REGION
 ```
 
 ## Clean up
