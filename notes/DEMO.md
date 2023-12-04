@@ -1,6 +1,7 @@
-# This demo briefly shows how to push x2 version of code into Cloud Run,
-# switch between the versions, and review logs and metrics.
-### https://cloud.google.com/run/docs/rollouts-rollbacks-traffic-migration
+ # Demo.md
+ This demo briefly shows how to push x2 version of code into Cloud Run,
+ switch between the versions, and review logs and metrics.
+ https://cloud.google.com/run/docs/rollouts-rollbacks-traffic-migration
 
 ## Setup redis
 export REDISHOST=$(gcloud redis instances describe redis-chat --region $REGION --format "value(host)")
