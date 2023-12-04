@@ -151,10 +151,7 @@ gcloud beta run services proxy
 
 ## Running Redis locally
 ```bash
-docker run --rm -d -p 6379:6379 --name myredis redis
-
-docker network create -d bridge redisnet
-docker run --rm -d -p 6379:6379 --name myredis --network redisnet redis
+docker run --rm -d -p 6379:6379 --name myredis redis:alpine
 ```
 
 ## Proxy into GCP Redis via jumphost
