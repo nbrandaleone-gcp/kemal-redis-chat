@@ -63,7 +63,7 @@ DNS name in real-time. I should duplicate and confirm...
 
 ```bash
 gcloud run deploy websockets --image nbrand/kemal-redis-chat:0.2  \
-    --no-traffic --tag green \
+    --update-env-vars DEBUG=true --no-traffic --tag green
 ```
 
 ---
