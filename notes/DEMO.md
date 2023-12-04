@@ -47,7 +47,7 @@ gcloud run services update-traffic websockets --to-latest
 
 ### Notice h1 tag has changed
 
-# Review logs
+## Review logs
 ```bash
 gcloud beta run services logs read websockets \
     --limit=20 --project testing-355714
@@ -55,7 +55,7 @@ gcloud beta run services logs read websockets \
 
 ---
 
-# Deploy a new tagged revision
+## Deploy a new tagged revision
 I would not use a tagged version during a demo.
 During testing, the creating a tagged version took a signficant
 amount of time.  I suspect it was due to the creation of a unique
@@ -65,3 +65,5 @@ DNS name in real-time. I should duplicate and confirm...
 gcloud run deploy websockets --image nbrand/kemal-redis-chat:0.2  \
     --no-traffic --tag green \
 ```
+
+---
