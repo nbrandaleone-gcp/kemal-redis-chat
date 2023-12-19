@@ -10,7 +10,7 @@ export REDISHOST=$(gcloud redis instances describe redis-chat --region $REGION -
 
 ## Deploy "standard" version of a container into Cloud Run
 ```bash
-gcloud run deploy websockets \
+gcloud beta run deploy websockets \
 	--allow-unauthenticated \
 	--image nbrand/kemal-redis-chat:0.1 \
 	--allow-unauthenticated \
@@ -56,14 +56,17 @@ gcloud beta run services logs read websockets \
 ---
 
 ## Deploy a new tagged revision
-I would not use a tagged version during a demo.
 During testing, the creating a tagged version took a signficant
 amount of time.  I suspect it was due to the creation of a unique
-DNS name in real-time. I should duplicate and confirm...
+DNS name in real-time. It worked fine the second time. Strange...
 
 ```bash
 gcloud run deploy websockets --image nbrand/kemal-redis-chat:0.2  \
     --update-env-vars DEBUG=true --no-traffic --tag green
+    
+gcloud run services update-traffic websockets --remove-tags green
+
+gcloud run services update-traffic websockets --to-tags green=100
 ```
 
 ---
